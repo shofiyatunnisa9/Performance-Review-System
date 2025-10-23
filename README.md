@@ -74,7 +74,7 @@
 
 ---
 
-## Project Structure (Opsional)
+## Project Structure
 
 ```
 project/
