@@ -10,7 +10,7 @@ export function useReviews(employeeId: number) {
     queryKey: ["reviews", employeeId],
     queryFn: async () => {
       const res = await api.get(`/employees/${employeeId}/reviews`);
-      return res.data; // array reviews
+      return res.data.data;
     },
     enabled: !!employeeId,
   });

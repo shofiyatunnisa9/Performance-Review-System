@@ -28,6 +28,7 @@ export default function EmployeesPage() {
             <th className="p-2 text-left">Email</th>
             <th className="p-2 text-left">Department</th>
             <th className="p-2 text-left">Position</th>
+            <th className="p-2 text-left">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -44,6 +45,14 @@ export default function EmployeesPage() {
                 <td className="p-2">{emp.email}</td>
                 <td className="p-2">{emp.department}</td>
                 <td className="p-2">{emp.position}</td>
+                <td className="p-2">
+                  <Link
+                    href={`/employees/${emp.id}/reviews`}
+                    className="bg-blue-500 text-white px-3 py-1 rounded-lg"
+                  >
+                    View Reviews
+                  </Link>
+                </td>
               </tr>
             ))
           )}

@@ -29,7 +29,7 @@ export const getEmployees = async (req: Request, res: Response) => {
     return res.status(200).json({
       code: 200,
       status: "succes",
-      data: employees,
+      data: employees || [],
       pagination: {
         total,
         page: parseInt(page as string),

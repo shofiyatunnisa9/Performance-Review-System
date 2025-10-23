@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { useReviews } from "@/hooks/useReviews";
 
 export default function EmployeeReviewsPage() {
-  const { id } = useParams(); // employee id dari url
+  const { id } = useParams();
   const employeeId = Number(id);
   const { reviews, isLoading, isError, createReview, isCreating } =
     useReviews(employeeId);
@@ -35,9 +35,10 @@ export default function EmployeeReviewsPage() {
 
   return (
     <div className="max-w-3xl mx-auto mt-10">
-      <h1 className="text-2xl font-bold mb-4">Employee Reviews</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Employee Reviews</h1>
 
       <form onSubmit={handleSubmit} className="mb-6 space-y-4">
+        <label className="font-bold">Review Date :</label>
         <input
           type="date"
           name="review_date"
@@ -46,6 +47,7 @@ export default function EmployeeReviewsPage() {
           className="w-full border p-2 rounded"
           required
         />
+        <label className="font-bold">Score (1 - 10) : </label>
         <input
           type="number"
           name="score"
@@ -56,17 +58,17 @@ export default function EmployeeReviewsPage() {
           className="w-full border p-2 rounded"
           required
         />
+        <label className="font-bold">Comments : </label>
         <textarea
           name="comments"
           value={form.comments}
           onChange={handleChange}
-          placeholder="Comments"
           className="w-full border p-2 rounded"
         />
         <button
           type="submit"
           disabled={isCreating}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg "
         >
           {isCreating ? "Saving..." : "Add Review"}
         </button>
