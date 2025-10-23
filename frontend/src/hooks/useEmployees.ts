@@ -23,7 +23,7 @@ export function useEmployees() {
       position: string;
     }) => {
       const res = await api.post("/employees", data);
-      return res.data;
+      return res.data.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["employees"] });
@@ -43,7 +43,8 @@ export function useEmployees() {
       };
     }) => {
       const res = await api.put(`/employees/${id}`, data);
-      return res.data;
+      console.log(res.data.data);
+      return res.data.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["employees"] });

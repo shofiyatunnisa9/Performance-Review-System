@@ -112,7 +112,7 @@ export const updateEmployee = async (req: Request, res: Response) => {
       code: 200,
       status: "Success",
       message: "Employee updated successfully",
-      data: updated,
+      data: updated || [],
     });
   } catch (error) {
     return res.status(500).json({

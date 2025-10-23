@@ -4,8 +4,14 @@ import Link from "next/link";
 import { useEmployees } from "@/hooks/useEmployees";
 
 export default function EmployeesPage() {
-  const { employees, isLoading, isError } = useEmployees();
+  const { employees, isLoading, isError, deleteEmployee, isDeleting } =
+    useEmployees();
 
+  const handleDelete = (id: string) => {
+    if (confirm("Are you sure you want to delete this employee?")) {
+      deleteEmployee(id);
+    }
+  };
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Gagal memuat data</p>;
 
@@ -45,13 +51,33 @@ export default function EmployeesPage() {
                 <td className="p-2">{emp.email}</td>
                 <td className="p-2">{emp.department}</td>
                 <td className="p-2">{emp.position}</td>
-                <td className="p-2">
-                  <Link
-                    href={`/employees/${emp.id}/reviews`}
-                    className="bg-blue-500 text-white px-3 py-1 rounded-lg"
-                  >
-                    View Reviews
-                  </Link>
+                <td className="p-3">
+                  <div className="flex gap-2">
+                    {/* Edit Button */}
+                    <Link
+                      href={`/employees/${emp.id}`}
+                      className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm transition-colors"
+                    >
+                      Edit
+                    </Link>
+
+                    {/* Delete Button */}
+                    <button
+                      onClick={() => handleDelete(emp.id)}
+                      disabled={isDeleting}
+                      className="bg-red-500 hover:bg-red-600 disabled:bg-red-300 text-white px-3 py-1 rounded text-sm transition-colors"
+                    >
+                      {isDeleting ? "Deleting..." : "Delete"}
+                    </button>
+
+                    {/* Reviews Button */}
+                    <Link
+                      href={`/employees/${emp.id}/reviews`}
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition-colors"
+                    >
+                      Reviews
+                    </Link>
+                  </div>
                 </td>
               </tr>
             ))
