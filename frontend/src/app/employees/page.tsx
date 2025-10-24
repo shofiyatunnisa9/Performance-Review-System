@@ -2,12 +2,15 @@
 
 import Link from "next/link";
 import { useEmployees } from "@/hooks/useEmployees";
+import { FaEdit } from "react-icons/fa";
+import { RiDeleteBin5Fill } from "react-icons/ri";
+import { MdOutlineRateReview } from "react-icons/md";
 
 export default function EmployeesPage() {
   const { employees, isLoading, isError, deleteEmployee, isDeleting } =
     useEmployees();
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: number | string) => {
     if (confirm("Are you sure you want to delete this employee?")) {
       deleteEmployee(id);
     }
@@ -29,12 +32,14 @@ export default function EmployeesPage() {
 
       <table className="w-full border border-gray-200">
         <thead>
-          <tr className="bg-gray-100">
-            <th className="p-2 text-left">Name</th>
-            <th className="p-2 text-left">Email</th>
-            <th className="p-2 text-left">Department</th>
-            <th className="p-2 text-left">Position</th>
-            <th className="p-2 text-left">Actions</th>
+          <tr className="bg-gray-400">
+            <th className="border border-gray-500 p-2 text-center">Name</th>
+            <th className="border border-gray-500 p-2 text-center">Email</th>
+            <th className="border border-gray-500 p-2 text-center">
+              Department
+            </th>
+            <th className="border border-gray-500 p-2 text-center">Position</th>
+            <th className="border border-gray-500 p-2 text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -47,36 +52,25 @@ export default function EmployeesPage() {
           ) : (
             employees.map((emp: any) => (
               <tr key={emp.id} className="border-t">
-                <td className="p-2">{emp.name}</td>
-                <td className="p-2">{emp.email}</td>
-                <td className="p-2">{emp.department}</td>
-                <td className="p-2">{emp.position}</td>
-                <td className="p-3">
-                  <div className="flex gap-2">
+                <td className="border border-gray-500 p-2">{emp.name}</td>
+                <td className="border border-gray-500 p-2">{emp.email}</td>
+                <td className="border border-gray-500 p-2">{emp.department}</td>
+                <td className="border border-gray-500 p-2">{emp.position}</td>
+                <td className="border border-gray-500 p-3">
+                  <div className="flex gap-5 items-center justify-center cursor-pointer">
+                    {/* Reviews Button */}
+                    <Link href={`/employees/${emp.id}/reviews`}>
+                      <MdOutlineRateReview size={20} />
+                    </Link>
                     {/* Edit Button */}
-                    <Link
-                      href={`/employees/${emp.id}`}
-                      className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm transition-colors"
-                    >
-                      Edit
+                    <Link href={`/employees/${emp.id}`}>
+                      <FaEdit size={20} />
                     </Link>
 
                     {/* Delete Button */}
-                    <button
-                      onClick={() => handleDelete(emp.id)}
-                      disabled={isDeleting}
-                      className="bg-red-500 hover:bg-red-600 disabled:bg-red-300 text-white px-3 py-1 rounded text-sm transition-colors"
-                    >
-                      {isDeleting ? "Deleting..." : "Delete"}
+                    <button onClick={() => handleDelete(emp.id)}>
+                      <RiDeleteBin5Fill size={20} />
                     </button>
-
-                    {/* Reviews Button */}
-                    <Link
-                      href={`/employees/${emp.id}/reviews`}
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition-colors"
-                    >
-                      Reviews
-                    </Link>
                   </div>
                 </td>
               </tr>

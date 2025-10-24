@@ -43,7 +43,6 @@ export function useEmployees() {
       };
     }) => {
       const res = await api.put(`/employees/${id}`, data);
-      console.log(res.data.data);
       return res.data.data;
     },
     onSuccess: () => {
@@ -55,7 +54,7 @@ export function useEmployees() {
   const deleteMutation = useMutation({
     mutationFn: async (id: string | number) => {
       const res = await api.delete(`/employees/${id}`);
-      return res.data;
+      return res.data.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["employees"] });

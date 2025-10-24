@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useReviews } from "@/hooks/useReviews";
 
 export default function EmployeeReviewsPage() {
+  const router = useRouter();
   const { id } = useParams();
   const employeeId = Number(id);
   const { reviews, isLoading, isError, createReview, isCreating } =
@@ -44,7 +45,7 @@ export default function EmployeeReviewsPage() {
           name="review_date"
           value={form.review_date}
           onChange={handleChange}
-          className="w-full border p-2 rounded"
+          className="w-full border border-gray-500 p-2 rounded"
           required
         />
         <label className="font-bold">Score (1 - 10) : </label>
@@ -55,7 +56,7 @@ export default function EmployeeReviewsPage() {
           max={10}
           value={form.score}
           onChange={handleChange}
-          className="w-full border p-2 rounded"
+          className="w-full border border-gray-500 p-2 rounded"
           required
         />
         <label className="font-bold">Comments : </label>
@@ -63,23 +64,32 @@ export default function EmployeeReviewsPage() {
           name="comments"
           value={form.comments}
           onChange={handleChange}
-          className="w-full border p-2 rounded"
+          className="w-full border border-gray-500 p-2 rounded"
         />
-        <button
-          type="submit"
-          disabled={isCreating}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg "
-        >
-          {isCreating ? "Saving..." : "Add Review"}
-        </button>
+        <div className="flex gap-4 items-end justify-end">
+          <button
+            type="submit"
+            disabled={isCreating}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg "
+          >
+            {isCreating ? "Saving..." : "Add Review"}
+          </button>
+          <button
+            type="button"
+            onClick={() => router.push("/employees")}
+            className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors font-medium"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
 
-      <table className="w-full border border-gray-200">
+      <table className="w-full border border-gray-500">
         <thead>
-          <tr className="bg-gray-100">
-            <th className="p-2 text-left">Date</th>
-            <th className="p-2 text-left">Score</th>
-            <th className="p-2 text-left">Comments</th>
+          <tr className="bg-gray-400">
+            <th className="border border-gray-500 p-2 text-center">Date</th>
+            <th className="border border-gray-500 p-2 text-center">Score</th>
+            <th className="border border-gray-500 p-2 text-center">Comments</th>
           </tr>
         </thead>
         <tbody>
@@ -91,12 +101,12 @@ export default function EmployeeReviewsPage() {
             </tr>
           ) : (
             reviews.map((r: any) => (
-              <tr key={r.id} className="border-t">
-                <td className="p-2">
+              <tr key={r.id} className="border border-gray-500">
+                <td className="border border-gray-500 p-2">
                   {new Date(r.reviewDate).toLocaleDateString()}
                 </td>
-                <td className="p-2">{r.score}</td>
-                <td className="p-2">{r.comments}</td>
+                <td className="border border-gray-500 p-2">{r.score}</td>
+                <td className="border border-gray-500 p-2">{r.comments}</td>
               </tr>
             ))
           )}

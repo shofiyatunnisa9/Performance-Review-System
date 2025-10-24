@@ -18,8 +18,8 @@ export default function EditEmployeePage() {
     position: "",
   });
 
-  // Find employee by ID
-  const currentEmployee = employees.find((emp: any) => emp.id === id);
+  const employeeId = Number(params.id);
+  const currentEmployee = employees.find((emp: any) => emp.id === employeeId);
 
   useEffect(() => {
     if (currentEmployee) {
@@ -64,13 +64,7 @@ export default function EditEmployeePage() {
   return (
     <div className="max-w-3xl mx-auto mt-10">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Edit Employee</h1>
-        <button
-          onClick={() => router.push("/employees")}
-          className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors"
-        >
-          Back to List
-        </button>
+        <h1 className="text-2xl font-bold text-center">Edit Employee</h1>
       </div>
 
       <form
@@ -78,7 +72,7 @@ export default function EditEmployeePage() {
         className="bg-white p-6 rounded-lg shadow-md border border-gray-200"
       >
         <div className="mb-4">
-          <label className="block text-gray-700 mb-2 font-medium">Name</label>
+          <label className="block text-gray-700 mb-2 font-medium">Name :</label>
           <input
             type="text"
             name="name"
@@ -90,7 +84,9 @@ export default function EditEmployeePage() {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 mb-2 font-medium">Email</label>
+          <label className="block text-gray-700 mb-2 font-medium">
+            Email :
+          </label>
           <input
             type="email"
             name="email"
@@ -103,7 +99,7 @@ export default function EditEmployeePage() {
 
         <div className="mb-4">
           <label className="block text-gray-700 mb-2 font-medium">
-            Department
+            Department :
           </label>
           <input
             type="text"
@@ -117,7 +113,7 @@ export default function EditEmployeePage() {
 
         <div className="mb-6">
           <label className="block text-gray-700 mb-2 font-medium">
-            Position
+            Position :
           </label>
           <input
             type="text"
@@ -129,19 +125,19 @@ export default function EditEmployeePage() {
           />
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-3 items-end justify-end">
           <button
             type="submit"
             disabled={isUpdating}
-            className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white px-6 py-3 rounded-lg transition-colors font-medium"
+            className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white px-6 py-2 rounded-lg transition-colors font-medium cursor-pointer"
           >
-            {isUpdating ? "Updating..." : "Update Employee"}
+            {isUpdating ? "Updating..." : "Edit"}
           </button>
 
           <button
             type="button"
             onClick={() => router.push("/employees")}
-            className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition-colors font-medium"
+            className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg transition-colors font-medium cursor-pointer"
           >
             Cancel
           </button>

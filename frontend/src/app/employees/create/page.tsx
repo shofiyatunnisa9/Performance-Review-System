@@ -28,7 +28,7 @@ export default function CreateEmployeePage() {
 
   return (
     <div className="max-w-md mx-auto mt-10">
-      <h1 className="text-2xl font-bold mb-4">Add Employee</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Add Employee</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
@@ -36,7 +36,7 @@ export default function CreateEmployeePage() {
           placeholder="Name"
           value={form.name}
           onChange={handleChange}
-          className="w-full border p-2 rounded"
+          className="w-full border p-2 rounded text-gray-500"
         />
         <input
           type="email"
@@ -44,7 +44,7 @@ export default function CreateEmployeePage() {
           placeholder="Email"
           value={form.email}
           onChange={handleChange}
-          className="w-full border p-2 rounded"
+          className="w-full border p-2 rounded text-gray-500"
         />
         <input
           type="text"
@@ -52,7 +52,7 @@ export default function CreateEmployeePage() {
           placeholder="Department"
           value={form.department}
           onChange={handleChange}
-          className="w-full border p-2 rounded"
+          className="w-full border p-2 rounded text-gray-500"
         />
         <input
           type="text"
@@ -60,14 +60,21 @@ export default function CreateEmployeePage() {
           placeholder="Position"
           value={form.position}
           onChange={handleChange}
-          className="w-full border p-2 rounded"
+          className="w-full border p-2 rounded text-gray-500"
         />
         <button
           type="submit"
           disabled={isCreating}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+          className="bg-blue-500 text-white w-full py-2 rounded-lg cursor-pointer"
         >
           {isCreating ? "Saving..." : "Save"}
+        </button>
+        <button
+          type="button"
+          onClick={() => router.push("/employees")}
+          className="bg-gray-500 text-white w-full py-2 rounded-lg cursor-pointer"
+        >
+          Cancel
         </button>
       </form>
     </div>
